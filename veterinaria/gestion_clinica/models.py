@@ -15,7 +15,7 @@ class Usuario(models.Model):
     email = models.EmailField(unique=True)
     contraseña_hash = models.CharField(max_length=255)
     rol = models.CharField(max_length=20, choices=ROLES)
-    fotografia = models.ImageField(upload_to='usuarios/', blank=True, null=True)
+    fotografia = models.CharField(max_length=255, blank=True, null=True)
     estado = models.BooleanField(default=True)
 
     class Meta:
@@ -40,7 +40,7 @@ class Mascota(models.Model):
     raza = models.CharField(max_length=50, blank=True, null=True)
     sexo = models.CharField(max_length=1, choices=SEXO, blank=True, null=True)
     fecha_nacimiento = models.DateField(blank=True, null=True)
-    fotografia = models.ImageField(upload_to='mascotas/', blank=True, null=True)
+    fotografia = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'mascota'

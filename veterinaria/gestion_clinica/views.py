@@ -1,5 +1,8 @@
 from django.shortcuts import render
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Usuario
 from rest_framework import viewsets
 from .models import (
     Usuario, Mascota, Vacuna, MascotaVacuna, Cita, 
@@ -64,3 +67,24 @@ class ChatbotConsultaViewSet(viewsets.ModelViewSet):
 class LogAccesoViewSet(viewsets.ModelViewSet):
     queryset = LogAcceso.objects.all()
     serializer_class = LogAccesoSerializer
+
+
+@api_view(['POST'])
+def login_usuario(request):
+    email = request.data.get('email')
+    contraseña = request.data.get('contraseña')
+
+    try:
+        usuario = Usuario.objects.get(email=email)
+        if usuario.contraseña_hash == contraseña:
+            return Response({
+                'id': usuario.id,
+                'nombre_completo': usuario.nombre_completo,
+                'email': usuario.email,
+                'rol': usuario.rol,
+                'fotografia': usuario.fotografia
+            })
+        else:
+            return Response({'error': 'Contraseña incorrecta'}, status=status.HTTP_401_UNAUTHORIZED)
+    except Usuario.DoesNotExist:
+        return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
