@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 function AdminPage() {
   const navigate = useNavigate();
@@ -11,7 +12,12 @@ function AdminPage() {
     }
   }, [usuario, navigate]);
 
-  return <h2>Panel de Administrador</h2>;
+  return (
+    <Layout>
+      <h2>Panel de Administrador</h2>
+      <p>Contenido exclusivo para el administrador.</p>
+    </Layout>
+  );
 }
 
 export default AdminPage;
