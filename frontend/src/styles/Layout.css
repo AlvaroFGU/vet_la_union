@@ -1,12 +1,13 @@
 .layout-container {
   display: flex;
   min-height: 100vh;
+  background: #f5f5f5; /* fondo base claro */
 }
 
 /* Sidebar lateral */
 .sidebar {
   width: 180px;
-  background: #4CAF50;
+  background: #F89B47; /* Naranja intenso */
   color: white;
   padding: 20px;
   position: fixed;
@@ -17,6 +18,7 @@
 
 .sidebar h2 {
   margin-top: 0;
+  font-family: 'Merriweather', serif;
 }
 
 .sidebar ul {
@@ -28,10 +30,11 @@
   margin: 15px 0;
   cursor: pointer;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
 .sidebar ul li:hover {
-  text-decoration: underline;
+  color: #FDCFA4; /* naranja claro al hover */
 }
 
 /* Contenido principal */
@@ -45,9 +48,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: #f1f1f1;
+  background: #FFF5EC; /* Fondo suave naranja */
   padding: 10px 20px;
   position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .user-info {
@@ -61,17 +65,19 @@
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  border: 2px solid #F89B47;
 }
 
 .user-name {
   display: block;
   font-weight: bold;
+  color: #333;
 }
 
 .user-role {
   display: block;
   font-size: 0.9rem;
-  color: gray;
+  color: #777;
 }
 
 /* Dropdown */
@@ -80,20 +86,23 @@
   right: 20px;
   top: 60px;
   background: white;
-  border: 1px solid #ccc;
+  border: 1px solid #FDCFA4;
   border-radius: 6px;
   width: 180px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
 .dropdown-menu p {
   margin: 0;
   padding: 10px;
   cursor: pointer;
+  font-weight: 500;
+  color: #333;
 }
 
 .dropdown-menu p:hover {
-  background: #f1f1f1;
+  background: #FDCFA4;
 }
 
 /* Contenido */

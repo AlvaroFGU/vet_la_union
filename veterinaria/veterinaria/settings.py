@@ -80,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vet_la_union',
-        'USER': 'root',        
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'USER': 'avnadmin',        
+        'PASSWORD': 'AVNS_jSDMf9O4Z37qlb93qks',
+        'HOST': 'vet-la-union-alvarofredgonza18-47a8.g.aivencloud.com',
+        'PORT': '22966'
     }
 }
 
