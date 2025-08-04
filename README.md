@@ -19,3 +19,8 @@ npx create-react-app frontend
 
 # Extencion en la carpeta
 npm install axios react-router-dom
+
+# para actualizar la app movil android
+npm run build
+npx cap copy
+//generar apk desde android estudio
