@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Usuario
 from rest_framework import viewsets
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import (
     Usuario, Mascota, Vacuna, MascotaVacuna, Cita, 
     ComposicionConsulta, ObservacionSintoma, EvaluacionDiagnostico,
@@ -15,6 +16,8 @@ from .serializers import (
     EvaluacionDiagnosticoSerializer, TratamientoSerializer, AccionTratamientoSerializer,
     RecetaSerializer, ChatbotConsultaSerializer, LogAccesoSerializer
 )
+from rest_framework_simplejwt.views import TokenObtainPairView
+from gestion_clinica.serializers import CustomTokenObtainPairSerializer
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
@@ -68,23 +71,32 @@ class LogAccesoViewSet(viewsets.ModelViewSet):
     queryset = LogAcceso.objects.all()
     serializer_class = LogAccesoSerializer
 
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 @api_view(['POST'])
 def login_usuario(request):
     email = request.data.get('email')
-    contraseña = request.data.get('contraseña')
+    contrasenia = request.data.get('contrasenia')
 
     try:
         usuario = Usuario.objects.get(email=email)
-        if usuario.contraseña_hash == contraseña:
+
+        if usuario.contrasenia_hash == contrasenia:
+            refresh = RefreshToken.for_user(usuario)
+
             return Response({
-                'id': usuario.id,
+                'id_usuario': usuario.id_usuario,
                 'nombre_completo': usuario.nombre_completo,
                 'email': usuario.email,
                 'rol': usuario.rol,
-                'fotografia': usuario.fotografia
+                'fotografia': usuario.fotografia,
+                'access': str(refresh.access_token),
+                'refresh': str(refresh)
             })
+
         else:
             return Response({'error': 'Contraseña incorrecta'}, status=status.HTTP_401_UNAUTHORIZED)
+
     except Usuario.DoesNotExist:
         return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
