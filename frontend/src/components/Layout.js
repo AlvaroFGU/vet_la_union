@@ -36,7 +36,7 @@ function Layout({ children }) {
         <header className="topbar">
           <div className="user-info" onClick={() => setMenuOpen(!menuOpen)}>
             <img
-              src={`https://via.placeholder.com/40`} // reemplazar con URL de fotografia
+              src={usuario.fotografia} 
               alt="foto usuario"
               className="avatar"
             />
