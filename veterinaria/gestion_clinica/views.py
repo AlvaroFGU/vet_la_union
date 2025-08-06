@@ -3,6 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Usuario
+import random
+from django.core.mail import send_mail
 from rest_framework import viewsets
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import (
@@ -100,3 +102,45 @@ def login_usuario(request):
 
     except Usuario.DoesNotExist:
         return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def enviar_codigo(request):
+    email = request.data.get('email')
+    if not email:
+        return Response({'error': 'Email requerido'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        usuario = Usuario.objects.get(email=email)
+        codigo = str(random.randint(100000, 999999))
+        usuario.codigo = codigo
+        usuario.save()
+
+        asunto = 'Código de recuperación de contraseña'
+        mensaje = f'Hola {usuario.nombre_completo},\n\nTu código de recuperación es: {codigo}'
+        remitente = None  # toma el DEFAULT_FROM_EMAIL
+        destinatarios = [email]
+
+        send_mail(asunto, mensaje, remitente, destinatarios)
+
+        return Response({'mensaje': 'Código enviado al correo.'})
+    except Usuario.DoesNotExist:
+        return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+def confirmar_cambio(request):
+    email = request.data.get('email')
+    codigo = request.data.get('codigo')
+    nueva_contrasenia = request.data.get('contrasenia')
+
+    if not all([email, codigo, nueva_contrasenia]):
+        return Response({'error': 'Todos los campos son requeridos'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        usuario = Usuario.objects.get(email=email, codigo=codigo)
+        usuario.contrasenia_hash = nueva_contrasenia  # o hasheada si luego usas auth real
+        usuario.codigo = None  # Limpia el código
+        usuario.save()
+        return Response({'mensaje': 'Contraseña actualizada correctamente'})
+    except Usuario.DoesNotExist:
+        return Response({'error': 'Código inválido o usuario no encontrado'}, status=status.HTTP_400_BAD_REQUEST)

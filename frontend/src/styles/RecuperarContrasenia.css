@@ -1,0 +1,174 @@
+/* Estilos generales */
+.recovery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #FDCFA4;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+.recovery-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.recovery-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.recovery-icon {
+  font-size: 50px;
+  color: #F89B47;
+  margin-bottom: 15px;
+}
+
+.recovery-header h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.recovery-header p {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Estilos de formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 93%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #F89B47;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(248, 155, 71, 0.2);
+}
+
+.email-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.email-input-group input {
+  flex: 1;
+}
+
+/* Estilos de botones */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.email-input-group button {
+  background-color: #F89B47;
+  color: white;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.email-input-group button.success-button {
+  background-color: #4CAF50;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #F89B47;
+  color: white;
+  margin-top: 10px;
+}
+
+.back-button {
+  background-color: transparent;
+  color: #F89B47;
+  width: 100%;
+  border: 1px solid #F89B47;
+}
+
+/* Mensajes */
+.error-message {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.success-message {
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.countdown {
+  color: #777;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .recovery-card {
+    padding: 30px 20px;
+  }
+  
+  .email-input-group {
+    flex-direction: column;
+  }
+
+  .form-group input {
+  width: 88%;
+}
+}

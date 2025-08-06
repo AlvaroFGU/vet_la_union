@@ -7,6 +7,7 @@ import AdminPage from "./components/AdminPage";
 import VeterinarioPage from "./components/VeterinarioPage";
 import RecepcionistaPage from "./components/RecepcionistaPage";
 import ClientePage from "./components/ClientePage";
+import RecuperarContrasenia from "./components/RecuperarContrasenia";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/veterinario" element={<VeterinarioPage />} />
         <Route path="/recepcionista" element={<RecepcionistaPage />} />
         <Route path="/cliente" element={<ClientePage />} />
+        <Route path="/recuperarContrasenia" element={<RecuperarContrasenia />} />
+
       </Routes>
     </Router>
   );

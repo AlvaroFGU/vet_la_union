@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from gestion_clinica.views import login_usuario
+from gestion_clinica.views import confirmar_cambio
+from gestion_clinica.views import enviar_codigo
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -49,4 +51,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login/', login_usuario),
+    path('api/enviar-codigo/', enviar_codigo, name='enviar_codigo'),
+    path('api/confirmar-cambio/', confirmar_cambio, name='confirmar_cambio'),
 ]
