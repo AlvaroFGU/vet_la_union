@@ -79,7 +79,7 @@ function Login() {
             </div>
             
             <div className="forgot-password">
-              <a href="#" onClick={(e) => {
+              <a href="/RecuperarContrasenia" onClick={(e) => {
                 e.preventDefault();
                 navigate("/RecuperarContrasenia"); 
               }} className="forgot-password-link">¿Olvidaste tu Contraseña?</a>
@@ -93,7 +93,7 @@ function Login() {
           {error && <p className="error-message">{error}</p>}
           
           <div className="signup-text">
-            ¿No tienes una cuenta? <a href="#" className="signup-link">Registrarse</a>
+            ¿No tienes una cuenta? <a href="/RecuperarContrasenia" className="signup-link">Registrarse</a>
           </div>
         </div>
       </div>
