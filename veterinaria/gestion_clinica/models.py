@@ -12,6 +12,8 @@ class Usuario(models.Model):
     ]
 
     id_usuario = models.AutoField(primary_key=True)
+    ci = models.CharField(max_length=15, unique=True) 
+    telefono = models.IntegerField(blank=True)
     nombre_completo = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     contrasenia_hash = models.CharField(max_length=255)

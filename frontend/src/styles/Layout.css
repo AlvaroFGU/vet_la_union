@@ -1,19 +1,20 @@
 .layout-container {
   display: flex;
   min-height: 100vh;
-  background: #f5f5f5; /* fondo base claro */
+  background: #f5f5f5;
 }
 
 /* Sidebar lateral */
 .sidebar {
   width: 180px;
-  background: #F89B47; /* Naranja intenso */
+  background: linear-gradient(180deg, #F89B47, #F77D24);
   color: white;
   padding: 20px;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.15);
 }
 
 .sidebar h2 {
@@ -27,14 +28,25 @@
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  padding: 10px;
   cursor: pointer;
-  font-weight: bold;
-  transition: color 0.3s;
+  font-weight: 500;
+  border-radius: 25px;
+  transition: background 0.3s, color 0.3s;
 }
 
 .sidebar ul li:hover {
-  color: #FDCFA4; /* naranja claro al hover */
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar ul li.active {
+  background: white;
+  color: #F77D24;
+  font-weight: bold;
 }
 
 /* Contenido principal */
@@ -48,7 +60,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: #FFF5EC; /* Fondo suave naranja */
+  background: #FFF5EC;
   padding: 10px 20px;
   position: relative;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -76,7 +88,7 @@
 
 .user-role {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #777;
 }
 
@@ -105,7 +117,93 @@
   background: #FDCFA4;
 }
 
-/* Contenido */
 .content {
   padding: 20px;
 }
+
+@media (max-width: 500px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #F89B47, #F77D24);
+    padding: 40px 20px 20px 10px;
+    z-index: 9999;
+    overflow-y: auto;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+    display: none; /* Oculto por defecto */
+  }
+
+  .sidebar.mobile-open {
+    display: block; /* Aparece cuando está activo */
+  }
+
+  /* Otros estilos como antes */
+  .sidebar ul {
+    margin-top: 30px;
+  }
+
+  .sidebar ul li {
+    font-size: 1.3rem;
+    padding: 15px 10px;
+  }
+
+  .mobile-close-btn {
+    position: fixed;
+    top: 25px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10000;
+  }
+
+  /* Botón hamburguesa visible en móvil */
+  .mobile-menu-btn {
+    display: inline-flex;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #F77D24;
+    margin-right: auto; 
+  }
+
+  /* Topbar: ocultar texto del usuario, mostrar solo la foto */
+  .user-info .user-text {
+    display: none;
+  }
+
+  /* Ajustar tamaño avatar para móvil */
+  .user-info .avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .topbar {
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+
+  .user-info {
+    margin-left: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 501px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+  .mobile-close-btn {
+    display: none;
+  }
+}
+
